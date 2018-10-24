@@ -31,6 +31,10 @@ void setup() {
   servo.attach(6);
   servo.write(0);
   digitalWrite(rele,HIGH);
+
+  while(digitalRead(botao2) == LOW){
+    
+  }
 }
 
 void loop() {
@@ -47,6 +51,7 @@ void loop() {
   valorLdr = analogRead(ldr);
   estadoLdr = map(valorLdr,0,1023,0,255);
 
+  /*
   estadoBotao2 = digitalRead(botao2);
 
   if(estadoBotao2 == HIGH){
@@ -54,7 +59,7 @@ void loop() {
   }else{
      
   }
-
+  */
 
   //Serial.println(estadoLdr);
   if(valorLdr > valorPot){
