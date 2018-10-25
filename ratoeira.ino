@@ -28,16 +28,23 @@ void setup() {
   pinMode(botao2, INPUT);
   pinMode(ledAtivo, OUTPUT);
   pinMode(rele, OUTPUT);
-  servo.attach(6);
-  servo.write(0);
+  servo.attach(9);
+  servo.write(180);
   digitalWrite(rele,HIGH);
 
+  
   while(digitalRead(botao2) == LOW){
-    
+    Serial.println("LAÇOOOO");
   }
+  
 }
 
 void loop() {
+
+
+  Serial.print(analogRead(ldr));
+  Serial.print("--");
+  Serial.println(analogRead(pot));
   //digitalWrite(rele, LOW);
   //servo.write(90);
   //digitalWrite(rele,HIGH);
@@ -45,11 +52,13 @@ void loop() {
   digitalWrite(ledRato,HIGH);
 
   //Lendo valor do potênciometro
+  
   valorPot = analogRead(pot);
   estadoPot = map(valorPot,0,1023,0,255);
   //Lendo o estado do LDR (Sensor de luminosidade)
   valorLdr = analogRead(ldr);
   estadoLdr = map(valorLdr,0,1023,0,255);
+  
 
   /*
   estadoBotao2 = digitalRead(botao2);
@@ -61,18 +70,22 @@ void loop() {
   }
   */
 
+  /*
+  estadoLdr = map(analogRead(ldr))0,1023,0,255));
+  estadoPot = map(analogRead(pot)),0,1023,0,255));
+  //
+  */
   //Serial.println(estadoLdr);
-  if(valorLdr > valorPot){
-    Serial.print(valorLdr);
-    Serial.print("--");
-    Serial.println(valorPot);
+  if(analogRead(ldr) > analogRead(pot)){
+    
     digitalWrite(ledAtivo, HIGH);
     //tone(buzzer, 400);
     //ativo = true;
     digitalWrite(rele,LOW);
+    //Ligando o cooler
     servo.write(0);
     //digitalWrite(rele,HIGH);
-    return;
+    //return;
   }
 
   if(digitalRead(botao) == HIGH){
@@ -81,14 +94,14 @@ void loop() {
       digitalWrite(ledAtivo, LOW);
       //noTone(buzzer);
       
-      digitalWrite(rele, LOW);
-      servo.write(140);
+      //digitalWrite(rele, HIGH);
+      servo.write(180);
       ativo = true;
       return;
     }
 
   if(ativo == true){
-    digitalWrite(rele, HIGH);
+    //digitalWrite(rele, HIGH);
   }
 
   //Serial.println("Estado do LDR");
